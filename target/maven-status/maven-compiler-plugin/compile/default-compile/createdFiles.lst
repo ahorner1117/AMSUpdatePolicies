@@ -1,0 +1,3 @@
+net\javaguides\usermanagement\web\UserServlet.class
+net\javaguides\usermanagement\dao\UserDAO.class
+net\javaguides\usermanagement\model\User.class
