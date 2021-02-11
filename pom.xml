@@ -6,7 +6,7 @@
 	<artifactId>jsp-servlet-jdbc-mysql-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>jsp-servlet-ex</name>
+	<name><!-- jsp-servlet-ex -->jsp-servlet-jdbc-mysql-example-0.0.1-SNAPSHOT</name>
  	<dependencies>
     <dependency>
         <groupId>org.apache.tomcat</groupId>
