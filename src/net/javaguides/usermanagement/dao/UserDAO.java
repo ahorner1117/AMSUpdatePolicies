@@ -28,10 +28,11 @@ public class UserDAO {
 
     public static User users[] = new User[500];
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES " +
-        " (?, ?, ?);";
+        " (?, ?, ?, ?);";
 
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
-    private static final String SELECT_ALL_USERS = "select * from users";
+    private static final String SELECT_ALL_USERS = "select * from users ORDER BY name ASC";
+    private static final String SELECT_ALL_USERS_DESC = "select * from users ORDER BY name DESC";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
 
@@ -100,6 +101,7 @@ public class UserDAO {
                 String email = rs.getString("email");
                 String country = rs.getString("country");
                 user = new User(id, name, email, country);
+                
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -107,15 +109,20 @@ public class UserDAO {
         return user;
     }
 
-    public List < User > selectAllUsers() {
-
+    public List < User > selectAllUsers(int x) {
+    	String userSelection = "";
+    	if (x == 1) {
+    		userSelection = SELECT_ALL_USERS_DESC;
+    	}else {
+    		userSelection = SELECT_ALL_USERS;
+    	}
         // using try-with-resources to avoid closing resources (boiler plate code)
         List < User > users = new ArrayList < > ();
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
 
             // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+            PreparedStatement preparedStatement = connection.prepareStatement(userSelection);) {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
@@ -172,67 +179,58 @@ public class UserDAO {
         }
     }
     
-    /*
-    public static void myCSVReader(String filename) {
-    	//String filename = "Employee-Information-Export.csv";
-        String path = "C:\\Users\\AHorner\\Downloads\\" + filename;
-        //file_path = path;
-        BufferedReader reader = null;
-        String line = "";
-        String csvSplitBy = ",";
-        int count = 0;
-        String fullName, email, country;
-        //User user[] = new User[500];
-        users[0] = new User("error", "error", "error");
-        System.out.println("Starting csv reader");
-        try {
-            reader = new BufferedReader(new FileReader(path));
-            while ((line = reader.readLine()) != null) {
-                String[] s = line.split(csvSplitBy);
-                fullName = s[1] + " " + s[2];
-                if(s[3] == "") {
-                	s[3] = "yo";
-                }
-                email = s[3];
-                country = "USA";
-                try {
-                    users[count] = new User(fullName, email, country );
-                    users[count].setName(fullName);
-                    users[count].setEmail(email);
-            		if(users[count].getEmail() == null) {
-            			users[count].setEmail("invalidemail@aol.com");
-            		}
-                    users[count].setCountry(country);
-                    
-                }catch(NullPointerException e) {
-                	System.out.println("Error null pointer");
-                	users[count] = new User("a", "b", "c");
-                }
-                count++;
+	public static void myCSVReader(String filename) {
 
-            }
-        } catch (Exception e) {
-        	
-            e.printStackTrace();
-        }
-        
-        for (int i = 62; i < count; i++) {
+		String path = "C:\\Users\\AHorner\\Downloads\\" + filename;
+		BufferedReader reader = null;
+		String line = "";
+		String csvSplitBy = ",";
+		int count = 0;
+		String fullName, email, country = "";
+		int key = 0;
 
-        		if(users[i] == null) {
-        			users[i] = new User("error" , "invalidemail@aol.com", "as");
-        		}
-        		try {
-        			//insertUser(user[i]);
-        		}catch(Exception e) {
-        			System.out.println("error error");
-        		}
-        		
-        		System.out.println(i + "= " +users[i].getName() + " " + users[i].getEmail() + " " + users[i].getCountry());
-        	
-        }
-       
+		//users[0] = new User("error", "error", "error");
+		System.out.println("Starting csv reader");
+		try {
+			reader = new BufferedReader(new FileReader(path));
+			while ((line = reader.readLine()) != null) {
+				String[] s = line.split(csvSplitBy);
+					if (s[0] != null) {
+						System.out.println(s[0] + " " + s[1] + " " + s[2] + " " + s[3]);
+					}
+				
+					String temp = s[0];
+					//System.out.println(temp);
+				//key = s[0];
+				
+				fullName = s[1] + " " + s[2];
 
+				email = s[3];
+				country = "USA";
+				
+				users[count] = new User(key, fullName, email, country);
+				count++;
 
+			}
+		} catch (Exception e) {
 
-    }*/
+			e.printStackTrace();
+		}
+
+		for (int i = count; i < count; i++) {
+
+			if (users[i] == null) {
+				users[i] = new User("error", "invalidemail@aol.com", "as");
+			}
+			try {
+				// insertUser(user[i]);
+			} catch (Exception e) {
+				System.out.println("error error");
+			}
+
+			System.out.println(i + "= " + users[i].getName() + " " + users[i].getEmail() + " " + users[i].getCountry());
+
+		}
+
+	}
 }

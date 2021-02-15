@@ -25,7 +25,7 @@ public class UserServlet extends HttpServlet {
 
     public void init() {
         userDAO = new UserDAO();
-    }
+    } 
        
 
 
@@ -51,6 +51,15 @@ public class UserServlet extends HttpServlet {
             case "/update":
                 updateUser(request, response);
                 break;
+            case "/chart":
+            	monthlyBreakdown(request, response);
+            	break;
+            case "/listUserDesc":
+            	listUserDesc(request, response);
+            	break;
+            case "/retained-chart":
+            	retainedChart(request, response);
+            	break;
             default:
                 listUser(request, response);
                 break;
@@ -63,10 +72,30 @@ public class UserServlet extends HttpServlet {
 	
     private void listUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
-        List < User > listUser = userDAO.selectAllUsers();
+        List < User > listUser = userDAO.selectAllUsers(0);
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
         dispatcher.forward(request, response);
+    }
+    
+    private void listUserDesc(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException, ServletException {
+        List < User > listUser = userDAO.selectAllUsers(1);
+        request.setAttribute("listUser", listUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listUserDesc.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void monthlyBreakdown(HttpServletRequest request, HttpServletResponse response) 
+	throws SQLException, IOException, ServletException{
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("monthly-breakdown.jsp");
+    	dispatcher.forward(request, response);
+    }
+    
+    private void retainedChart(HttpServletRequest request, HttpServletResponse response) 
+	throws SQLException, IOException, ServletException{
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("retained-chart.jsp");
+    	dispatcher.forward(request, response);
     }
     
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
