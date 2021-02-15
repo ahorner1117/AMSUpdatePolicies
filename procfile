@@ -1,0 +1,1 @@
+web: java -jar C:\Users\AHorner\eclipse-workspace\eclipse-workspace-ee\jsp-servlet-jdbc-mysql-example\target\jsp-servlet-jdbc-mysql-example-0.0.1-SNAPSHOT.war
