@@ -117,7 +117,7 @@ function sortTable(){
 				<thead>
 					<tr>
 						<th>ID</th>					<!-- ------- Need to use some href here to change condition for order asc or desc -->
-						<th>Name&nbsp<a href="<%=request.getContextPath()%>/list"><i class='fas fa-angle-up' id="up_down" onclick="sortTable()"></i></th></a> <!-- fas fa-angle-up -->
+						<th>Name&nbsp;<a href="<%=request.getContextPath()%>/list"><i class='fas fa-angle-up' id="up_down" onclick="sortTable()"></i></a></th> <!-- fas fa-angle-up -->
 						<th>Email</th>
 						<th>Country</th>	
 						<th>Actions</th>
