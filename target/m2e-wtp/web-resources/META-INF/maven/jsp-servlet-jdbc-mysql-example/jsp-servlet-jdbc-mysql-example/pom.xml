@@ -7,6 +7,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>jsp-servlet-ex<!-- jsp-servlet-jdbc-mysql-example-0.0.1-SNAPSHOT --></name>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
  	<dependencies>
     <dependency>
         <groupId>org.apache.tomcat</groupId>
