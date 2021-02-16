@@ -110,7 +110,7 @@ public class UserDAO {
     }
 
     public List < User > selectAllUsers(int x) {
-    	String userSelection = "";
+    	String userSelection = SELECT_ALL_USERS;
     	if (x == 1) {
     		userSelection = SELECT_ALL_USERS_DESC;
     	}else {
