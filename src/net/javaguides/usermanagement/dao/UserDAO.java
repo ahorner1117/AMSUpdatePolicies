@@ -28,7 +28,7 @@ public class UserDAO {
 
     public static User users[] = new User[500];
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES " +
-        " (?, ?, ?, ?);";
+        " (?, ?, ?);";
 
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
     private static final String SELECT_ALL_USERS = "select * from users ORDER BY name ASC";
