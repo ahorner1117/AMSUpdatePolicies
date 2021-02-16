@@ -137,6 +137,8 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             printSQLException(e);
+        }catch(NullPointerException v) {
+        	v.printStackTrace();
         }
         return users;
     }
