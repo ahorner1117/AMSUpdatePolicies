@@ -2,6 +2,7 @@ package net.javaguides.usermanagement.dao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,6 +24,11 @@ import net.javaguides.usermanagement.model.User;
 
 public class UserDAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false";
+	//private String jdbcURL = System.getenv("DATABASE_URL");
+    //private String dburl = "postgres://bvgyhcdkjguuhg:1ba2d4ee6c61112a2a68dea115e3ae0e6af2849a932ad55788ecdee1853263fe@ec2-34-194-215-27.compute-1.amazonaws.com:5432/d6t5t2mmjga6sh";
+
+    
+    
     private String jdbcUsername = "root";
     private String jdbcPassword = "password";
 
@@ -40,12 +46,18 @@ public class UserDAO {
 
     // Connect to the database using jdbc driver with url, name, and pass
     protected Connection getConnection() {
+    	//String password = "";
+    	//String username = "";
+
+    	//System.out.println("JDBC SYS ENV = " + jdbcURL);
         Connection connection = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+            //connection = DriverManager.getConnection(dburl);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
+        	System.out.println("SQL Exception caught");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
@@ -53,6 +65,12 @@ public class UserDAO {
         }
         return connection;
     }
+    
+    
+    public static void obtainUsersAPI() {
+    	
+    }
+    
 
     public void insertUser(User user) throws SQLException {
         System.out.println(INSERT_USERS_SQL);
