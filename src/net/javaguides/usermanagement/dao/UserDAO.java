@@ -25,7 +25,7 @@ import net.javaguides.usermanagement.model.User;
 public class UserDAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false";
 	//private String jdbcURL = System.getenv("DATABASE_URL");
-    //private String dburl = "postgres://bvgyhcdkjguuhg:1ba2d4ee6c61112a2a68dea115e3ae0e6af2849a932ad55788ecdee1853263fe@ec2-34-194-215-27.compute-1.amazonaws.com:5432/d6t5t2mmjga6sh";
+    //private String dburl = "jdbc:postgres://bvgyhcdkjguuhg:1ba2d4ee6c61112a2a68dea115e3ae0e6af2849a932ad55788ecdee1853263fe@ec2-34-194-215-27.compute-1.amazonaws.com:5432/d6t5t2mmjga6sh";
 
     
     
@@ -66,10 +66,6 @@ public class UserDAO {
         return connection;
     }
     
-    
-    public static void obtainUsersAPI() {
-    	
-    }
     
 
     public void insertUser(User user) throws SQLException {
