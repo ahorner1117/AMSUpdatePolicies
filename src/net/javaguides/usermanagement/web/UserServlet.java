@@ -161,12 +161,6 @@ public class UserServlet extends HttpServlet {
 	}
 
 	public static String[] getAMSCustomers() {
-		/*
-		 * try { Date highestDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
-		 * Locale.ENGLISH).parse("1930-11-05T00:00:00Z"); }catch (Exception e) { //
-		 * TODO: handle exception System.out.println("Could not declare highestDate"); }
-		 */
-
 		String[] stringArray = new String[3];
 		client = new OkHttpClient().newBuilder().build();
 		for (int i = 0; i < 250; i++) {
@@ -236,12 +230,6 @@ public class UserServlet extends HttpServlet {
 		for (int i = 0; i < jsonCount; i++) {
 			System.out.println(i + " Eff date = " + effectiveDate[i] + ", Pol Id =" + policyId[i] + " | Expiry date = "
 					+ expiryDate[i]);
-		//	if (i == jsonCount -1) {		
-				
-			//	System.out.println("Hit the breaks");
-			//	break;
-			//}
-			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 			Date now = new Date();
 			try {
 
@@ -253,9 +241,7 @@ public class UserServlet extends HttpServlet {
 					date2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(expiryDate[i + 1]);
 				}else {
 					date2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(expiryDate[i]);
-				}
-				
-
+				}				
 				// If the cancellation date is before today, get the index and store it in a new
 				// array
 				if (date1.before(now)) {
@@ -629,7 +615,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	public static void amsObtainToken() {
-		String token;
+		
 		client = new OkHttpClient().newBuilder().build();
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 		RequestBody body = RequestBody.create(mediaType, "");
