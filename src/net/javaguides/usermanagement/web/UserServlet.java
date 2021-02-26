@@ -138,10 +138,10 @@ public class UserServlet extends HttpServlet {
 	public static void getCustomerPolicies() {
 		client = new OkHttpClient().newBuilder().build();
 		// for(int i = 0; i <3; i++) {
-		System.out.println("getting policies for \"63565501-76e7-42ea-852b-e580d38a5f11\"");
+		System.out.println("getting policies for \"46d20382-a95b-409c-9fda-7c721510cee5\"");
 		Request request = new Request.Builder()
 				.url("https://api-sandbox.vertafore.com/authgrant/v1/api/Customers("
-						+ /* custId[71] */ "63565501-76e7-42ea-852b-e580d38a5f11" + ")/Policies")
+						+ /* custId[71] */ "46d20382-a95b-409c-9fda-7c721510cee5" + ")/Policies")
 				.method("GET", null).addHeader("Authorization", "Bearer " + ams_access_token).build();
 		try {
 			response = client.newCall(request).execute();
@@ -284,6 +284,14 @@ public class UserServlet extends HttpServlet {
 
 				} else if (date1.compareTo(date2) == 0) {
 					System.out.println("i is equal to i+1");
+					if(date1.before(now)) {
+						highestDate = date1;
+						System.out.println("i is after i+1");
+						highest = expiryDate[i];
+						mostRecentDate = expiryDate[i];
+						polIdToCancel = policyId[i];
+					}
+					
 					//expiredPoliciesCount++;
 				}
 				// }
