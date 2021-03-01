@@ -10,6 +10,7 @@
                         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/functions"/>
                         
         
         <property name="context-root" value="jsp-servlet-jdbc-mysql-example"/>
