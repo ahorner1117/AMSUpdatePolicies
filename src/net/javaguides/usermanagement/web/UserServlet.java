@@ -230,10 +230,14 @@ public class UserServlet extends HttpServlet {
 		for (int i = 0; i < jsonCount; i++) {
 			System.out.println(i + " Eff date = " + effectiveDate[i] + ", Pol Id =" + policyId[i] + " | Expiry date = "
 					+ expiryDate[i]);
-			Date now = new Date();
+			Date now = null;
+			
 			try {
 
 				now = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(sdf.format(now));
+				
+				// Set current month for expiry comparison to one month ago
+				now.setMonth(now.getMonth()-1);
 				date1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(expiryDate[i]);
 				highestDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).parse(highest);
 				if(i != jsonCount -1) {
@@ -373,11 +377,7 @@ public class UserServlet extends HttpServlet {
 		try {
 			Date dateExpired = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(expDate);
 			Date dateEffective = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(effDate);
-			
-			//Calendar calExpired = Calendar.getInstance();
-			//Calendar calEffective = Calendar.getInstance();
-			
-			
+
 			System.out.println("Exp Date = " + dateExpired);
 			System.out.println("Eff date  = " + dateEffective);
 			if(dateExpired.before(dateEffective) || dateExpired.equals(dateEffective)) {
